@@ -1,0 +1,11 @@
+<h1>This is the reset password page</h1>
+<%= flash.now[:errors] %>
+<form action="<%= users_reset_url %>" method="post" accept-charset="utf-8">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<label for="email">Email</label>
+<input type="text" name="user[email]" value="" id="email">
+<label for="password">Password</label>
+<input type="password" name="user[password]" value="" id="password">
+	
+<p><input type="submit" value="Reset My Password &rarr;"></p>
+</form>

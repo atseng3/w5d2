@@ -1,0 +1,9 @@
+<h1>Forgot My Password!</h1>
+<%= flash.now[:errors] %>
+<form action="<%= users_verify_url %>" method="post" accept-charset="utf-8">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	
+	<label for="email">Enter your Email</label><input type="text" name="user[email]" value="<%= @user.email %>" id="email">
+	
+	<p><input type="submit" value="Send Password Reset Email &rarr;"></p>
+</form>
