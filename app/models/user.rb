@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
   
   before_validation :ensure_tokens
   
+  has_many :circles, :foreign_key => :owner_id, :class_name => 'FriendCircle'
+  has_many :circle_memberships, :foreign_key => :member_id, :class_name => 'FriendCircleMembership'
+  
+  has_many :posts
+  
   def reset_password(pass)
     self.password = pass
     self.save!

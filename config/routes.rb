@@ -3,6 +3,10 @@ FriendCircles::Application.routes.draw do
   post 'users/verify' => 'users#verify'
   get 'users/reset_request' => 'users#reset_request'
   post 'users/reset' => 'users#reset'
-  resources :users
+  resources :users do
+    resources :friend_circles
+  end
   resource :session
+  resources :posts
+  resources :links
 end

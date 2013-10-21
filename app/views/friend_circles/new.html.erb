@@ -1,0 +1,38 @@
+<h1>Create a New Circle!</h1>
+<%= flash.now[:errors] %>
+
+<form action="<%= user_friend_circles_url(current_user.id) %>" method="post" accept-charset="utf-8">
+
+<input 
+			 type="hidden" 
+			 name="authenticity_token" 
+			 value="<%= form_authenticity_token %>">
+<label for="name">Name</label>
+			 
+<input 
+			 type="text" 
+			 name="circle[name]" 
+			 value="<%= @circle.name %>" 
+			 id="name">
+	
+<fieldset>
+	<legend>Add Friends to Circle</legend>
+	<% User.all.each do |user| %>
+		<% html_id = "member_#{user.id}" %>
+		<input 
+					 type="checkbox" 
+					 name="circle[member_ids][]" 
+					 value="<%= user.id %>" 
+					 id="<%= html_id %>">
+		<label for="<%= html_id %>"><%= user.email %></label>
+	<% end %>
+</fieldset>
+	
+<input 
+			 type="hidden" 
+			 name="circle[owner_id]" 
+			 value="<%= current_user.id %>" 
+			 id="circle[owner_id]">
+			 
+<p><input type="submit" value="Create Circle &rarr;"></p>
+</form>

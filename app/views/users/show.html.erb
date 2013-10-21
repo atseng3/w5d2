@@ -1,0 +1,5 @@
+<h1>This is the user's show page</h1>
+<%= flash[:errors] %>
+<% @user.circles.each do |circle| %>
+<li><%= link_to circle.name, user_friend_circle_url(@user, circle) %></li>
+<% end %>

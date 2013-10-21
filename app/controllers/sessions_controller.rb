@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_credentials(params[:user])
     if !!@user
+      login(@user)
       render :json => @user
       # redirect_to posts_url
     else

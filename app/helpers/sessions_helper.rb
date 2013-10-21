@@ -1,12 +1,15 @@
 module SessionsHelper
-  
-  
-  def current_user
-    User.find_by_session_token(session[:session_token])
+  def ensure_current_user
+    redirect_to new_session_url if current_user.nil?
   end
   
-  def login
-    session[:session_token] = @user.reset_session_token!
+  def current_user
+    @current_user ||= User.find_by_session_token(session[:session_token])
+  end
+  
+  def login(user)
+    user.reset_session_token!
+    session[:session_token] = user.session_token
   end
   
   def logout
@@ -15,7 +18,8 @@ module SessionsHelper
   end
   
   def logged_in?
-    !!current_user
+    return false if current_user.nil?
+    current_user.session_token == session[:session_token]
   end
   
   def send_email
